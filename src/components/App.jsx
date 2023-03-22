@@ -18,17 +18,10 @@ export class App extends Component {
     filter: '',
   };
 
-  id = nanoid();
-
   handleChange = e => {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
   };
-
-  // addContact = values => {
-  //   values.id = nanoid();
-  //   this.setState(prev => ({ contacts: [values, ...prev.contacts] }));
-  // };
 
   addContact = values => {
     const sameName = this.state.contacts.find(
@@ -38,9 +31,8 @@ export class App extends Component {
     if (sameName) return alert(sameName.name + ' is already in contacts.');
 
     const newContact = {
+      ...values,
       id: nanoid(),
-      name: values.name,
-      number: values.number,
     };
 
     this.setState(({ contacts }) => ({
